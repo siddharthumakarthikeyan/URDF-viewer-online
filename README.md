@@ -9,9 +9,8 @@ runs client-side using WebGL.
 > URDF, browser URDF viewer, view URDF online, URDF visualization, robot
 > model viewer, 3D URDF viewer, RViz alternative.
 
-Live demo: deploy to Vercel with one click (see below).
+Live: https://urdf-viewer-online.vercel.app/
 
-Repository: <https://github.com/siddharthumakarthikeyan/URDF-viewer-online>
 
 ## Highlights
 
@@ -65,18 +64,6 @@ npm run start   # serve the production build
 npm run lint    # next lint
 ```
 
-## Deploy to Vercel
-
-1. Push this folder to your GitHub repo (this repo already targets
-   `siddharthumakarthikeyan/URDF-viewer-online`).
-2. Go to <https://vercel.com/new> and import the repository.
-3. Leave the framework preset on **Next.js** and click **Deploy**. No
-   environment variables or build overrides are required.
-4. Optional but recommended: set `NEXT_PUBLIC_SITE_URL` to your final domain
-   so the sitemap, robots.txt, canonical URL, and Open Graph image use it.
-
-The output is fully static and works on any host that serves a Next.js build.
-
 ## Using the viewer
 
 1. Open the deployed site (or `http://localhost:3000` during development).
@@ -87,20 +74,6 @@ The output is fully static and works on any host that serves a Next.js build.
 4. Orbit / pan / zoom with the mouse. Use the right-hand panel to move every
    joint with a slider, or **Reset joints** to zero them.
 
-## SEO and discoverability
-
-The site ships with:
-
-- Rich `<head>` metadata (title template, description, keywords, Open Graph,
-  Twitter card, canonical URL).
-- A dynamic Open Graph image generated at the edge.
-- `app/robots.ts` and `app/sitemap.ts` powered by Next.js' built-in metadata
-  routes.
-- JSON-LD structured data: `WebApplication`, `SoftwareSourceCode`, and an
-  `FAQPage`.
-- Server-rendered, screen-reader-only `<h1>`, prose, and FAQ content so search
-  engines see real text even though the viewport itself is a client-side 3D
-  canvas.
 
 For best search results after deploying:
 
@@ -116,31 +89,6 @@ For best search results after deploying:
    discoverability.
 4. Link the deployed site from the repo's **About** sidebar.
 
-## How it works
-
-- `lib/zipFs.ts` — reads the dropped zip into an in-memory virtual filesystem,
-  discovers `package.xml` files, indexes URDF / xacro entries, and resolves
-  `package://`, `$(find ...)`, absolute, and relative mesh references.
-- `lib/xacroProcess.ts` — wires `xacro-parser` to that VFS so includes,
-  property substitutions, and macros all resolve client-side.
-- `lib/urdfLoad.ts` — feeds the processed URDF XML into `urdf-loader` and
-  rewrites mesh requests through blob URLs from the VFS.
-- `components/Viewer.tsx` — three.js scene, camera, lights, drag-and-drop
-  surface, and the robot-attached X / Y / Z gizmo.
-- `components/JointPanel.tsx` — sliders for every non-fixed joint with the
-  URDF limits applied.
-
-## Limitations
-
-- Only visual geometry is loaded. Collision geometry is intentionally skipped
-  for speed.
-- Meshes referenced by absolute filesystem paths (e.g.
-  `/home/me/.../mesh.stl`) are resolved by tail-matching inside the zip.
-  Prefer `package://pkg_name/...` references when possible.
-- Links that declare no material are rendered with a neutral gray PBR
-  material.
-- This is a kinematic inspector only; it does not simulate physics, contacts,
-  or controllers.
 
 ## Project structure
 
