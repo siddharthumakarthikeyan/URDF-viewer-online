@@ -512,7 +512,7 @@ function SidebarFooter() {
         </a>
         <span aria-hidden="true">·</span>
         <a
-          href="https://www.linkedin.com/in/siddharthumakarthikeyan"
+          href="https://www.linkedin.com/in/siddharthind/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn profile of Siddharth Umakarthikeyan"
