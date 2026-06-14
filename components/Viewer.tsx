@@ -342,16 +342,21 @@ export default function Viewer() {
         style={{
           borderLeft: "1px solid var(--border)",
           background: "var(--panel)",
-          overflowY: "auto",
-          padding: 12,
+          padding: 0,
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 0,
         }}
       >
-        <JointPanel
-          joints={jointNames}
-          values={jointValues}
-          robot={robot}
-          onChange={setJoint}
-        />
+        <div style={{ overflowY: "auto", padding: 12, flex: "1 1 auto", minHeight: 0 }}>
+          <JointPanel
+            joints={jointNames}
+            values={jointValues}
+            robot={robot}
+            onChange={setJoint}
+          />
+        </div>
+        <SidebarFooter />
       </aside>
     </div>
   );
@@ -464,6 +469,69 @@ function Overlay(props: {
         )}
       </div>
     </div>
+  );
+}
+
+function SidebarFooter() {
+  return (
+    <footer
+      style={{
+        flex: "0 0 auto",
+        borderTop: "1px solid var(--border)",
+        background: "var(--panel-2)",
+        padding: "10px 12px",
+        fontSize: 11,
+        lineHeight: 1.45,
+        color: "var(--muted)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 6,
+      }}
+    >
+      <div>
+        Developed and maintained by{" "}
+        <a
+          href="https://github.com/siddharthumakarthikeyan"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "var(--accent)", textDecoration: "none", fontWeight: 600 }}
+        >
+          Siddharth Umakarthikeyan
+        </a>
+        .
+      </div>
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+        <a
+          href="https://github.com/siddharthumakarthikeyan"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile of Siddharth Umakarthikeyan"
+          style={{ color: "var(--muted)", textDecoration: "none" }}
+        >
+          GitHub
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href="https://www.linkedin.com/in/siddharthumakarthikeyan"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile of Siddharth Umakarthikeyan"
+          style={{ color: "var(--muted)", textDecoration: "none" }}
+        >
+          LinkedIn
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href="https://github.com/siddharthumakarthikeyan/URDF-viewer-online"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Source code on GitHub"
+          style={{ color: "var(--muted)", textDecoration: "none" }}
+        >
+          Source
+        </a>
+      </div>
+    </footer>
   );
 }
 
